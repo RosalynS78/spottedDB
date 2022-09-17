@@ -10,10 +10,10 @@ const saltRounds = 10
 
 const signup = (req, res) => {
   const { username, email, password } = req.body
-  let sql = "INSERT INTO usersCredentials (username, password) VALUES (?, ?)"
+  let sql = "INSERT INTO usersCredentials (username, email, password) VALUES (?, ?, ?)"
 
   bcrypt.hash(password, saltRounds, function(err, hash) {
-    sql = mysql2.format(sql, [ username, hash ])
+    sql = mysql2.format(sql, [ username, email, hash ])
   
     pool.query(sql, (err, result) => {
       if (err) {
