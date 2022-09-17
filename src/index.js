@@ -17,7 +17,7 @@ app.get("/hello", function(req, res) {
      res.send("Hello! Page by " + process.env.developer);
 })
 
-let userRoutes = require("./routes/userRoutes");
+let userRoutes = require("../routes/userRoutes");
 app.use(userRoutes);
 
 
