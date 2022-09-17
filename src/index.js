@@ -12,7 +12,7 @@ app.use(cors({
 
 app.use(express.static('public'))
 
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
      // example for .env
      res.send("Hello! Page by " + process.env.developer);
 })
