@@ -14,7 +14,7 @@ let register = async function(req, res){
     let pwHash = await argon.hash(password);
     let params = [username, email, pwHash];
 
-    let sql = "insert into usersjoedirt99(username, email, pw_hash) values ( ?, ?, ?)" ;
+    // let sql = "insert into usersjoedirt99(username, email, pw_hash) values ( ?, ?, ?)" ;
 
 
     db.query(sql, params, function(err, results){
@@ -35,7 +35,7 @@ let login = async function(req, res){
     // let email = req.body.email;
     let password = req.body.password;
     let dbPWHash;
-    let sql = "select id, pw_hash from usersjoedirt99 where username = ?" ;
+    // let sql = "select id, pw_hash from usersjoedirt99 where username = ?" ;
     let params = [username];
 
     db.query(sql, params, async function(err, results){

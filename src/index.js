@@ -4,7 +4,8 @@ const express = require("express");
  app.use(express.json());
  let port = process.env.PORT || 8000;
 
- const cors = require('cors');
+ const cors = require("cors");
+ 
 app.use(cors({
     origin: ['http://localhost:3000'],
     exposedHeaders: 'Authorization'
