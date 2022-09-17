@@ -5,10 +5,14 @@ const express = require("express");
  let port = process.env.PORT || 8000;
 
  const cors = require("cors");
- 
+
 app.use(cors({
-    origin: ['http://localhost:3000'],
-    exposedHeaders: 'Authorization'
+    // origin: ['http://localhost:3000'],
+    // exposedHeaders: 'Authorization'
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
+    
 }));
 
 app.use(express.static('public'))
