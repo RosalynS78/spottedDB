@@ -1,4 +1,4 @@
-let db = require("../sql/db");
+let db = require("../sql/db.sql");
 let argon = require("argon2");
 
 let jwt = require("jsonwebtoken");
