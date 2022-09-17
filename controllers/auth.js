@@ -1,6 +1,6 @@
 const axios = require('axios')
 const mysql2 = require('mysql2')
-let argon = require("argon2")
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const pool = require('../sql/connections')
 const { handleSQLError } = require('../sql/error')
@@ -12,7 +12,7 @@ const signup = (req, res) => {
   const { username, email, password } = req.body
   let sql = "INSERT INTO usersCredentials (username, password) VALUES (?, ?)"
 
-  argon.hash(password, saltRounds, function(err, hash) {
+  bcrypt.hash(password, saltRounds, function(err, hash) {
     sql = mysql2.format(sql, [ username, hash ])
   
     pool.query(sql, (err, result) => {
@@ -61,7 +61,7 @@ const login = (req, res) => {
     if (!rows.length)  res.status(404).send('No matching users')
     
     const hash = rows[0].password
-    argon.compare(password, hash)
+    bcrypt.compare(password, hash)
       .then(result => {
         if (!result) return res.status(400).send('Invalid password')
  
