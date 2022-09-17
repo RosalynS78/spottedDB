@@ -1,0 +1,16 @@
+{
+  "name": "spotted_data",
+  "version": "1.0.0",
+  "description": "spotted backend",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "node": "^18.9.0"
+  }
+}
