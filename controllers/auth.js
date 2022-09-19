@@ -1,6 +1,10 @@
+
+
+
 const axios = require('axios')
 const mysql2 = require('mysql2')
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
+const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 const pool = require('../sql/connections')
 const { handleSQLError } = require('../sql/error')
@@ -12,7 +16,7 @@ const signup = (req, res) => {
   const { username, password } = req.body
   let sql = "INSERT INTO usersCredentials (username, password) VALUES (?, ?)"
 
-  bcrypt.hash(password, saltRounds, function(err, hash) {
+  argon2.hash(password, saltRounds, function(err, hash) {
     sql = mysql2.format(sql, [ username, hash ])
   
     pool.query(sql, (err, result) => {
@@ -56,26 +60,50 @@ const login = (req, res) => {
   let sql = "SELECT * FROM usersCredentials WHERE username = ?"
   sql = mysql2.format(sql, [ username ])
 
-  pool.query(sql, (err, rows) => {
-    if (err) return handleSQLError(res, err)
-    if (!rows.length)  res.status(404).send('No matching users')
-    
-    const hash = rows[0].password
-    bcrypt.compare(password, hash)
-      .then(result => {
-        if (!result) return res.status(400).send('Invalid password')
- 
-        const data = { ...rows[0] }
-        data.password = 'REDACTED'
+  try {
+  pool.query(sql, async (err, results) => {
+    if (err) return handleSQLError(results, err)
 
-        const token = jwt.sign(data, 'secret')
-        res.json({
-          msg: 'Login successful',
-          token
-        })
-      })
+    if (!results.length) return res.status(404).send('No matching users')
+    
+//     const hash = results[0].password
+//     argon.compare(password, hash)
+//       .then(result => {
+//         if (!result) return res.status(400).send('Invalid password')
+ 
+//         const data = { ...results[0] }
+//         data.password = 'REDACTED'
+
+//         const token = jwt.sign(data, 'secret')
+//         res.json({
+//           msg: 'Login successful',
+//           token
+//         })
+//       })
+//   })
+// }
+
+if (await argon2.verify(results[0].password, password, {type: argon2.argon2i})) {
+  const data = {...results[0]}
+  
+  const token = jwt.sign(data, process.env.JWT_SECRET, {expiresIn: "4h"})
+  res.json({
+      msg: "Logged in " + username,
+      token
   })
+} else {
+  res.send("Invalid Password Please Try Again")
+// passwords did not match
 }
+  
+})
+}
+catch(err) {
+  res.send(err)
+}
+// save user token
+}
+
 
 module.exports = {
   signup,

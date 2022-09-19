@@ -12,6 +12,8 @@ const logger = (req, res, next) => {
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
+    credentialsRequired: false,
+    ignoreExpiration: true,
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
@@ -20,10 +22,11 @@ const checkJwt = jwt({
   // Validate the audience and the issuer.
   audience: process.env.AUTH0_IDENTITY,
   issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-  algorithms: ['RS256']
+  algorithms: ['sha1', 'RS256', 'HS256']
 });
 
 module.exports = {
   logger,
   checkJwt
 }
+
