@@ -22,7 +22,7 @@ const checkJwt = jwt({
   // Validate the audience and the issuer.
   audience: process.env.AUTH0_IDENTITY,
   issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-  algorithms: ['sha1', 'RS256', 'HS256']
+  algorithms: ['RS256']
 });
 
 module.exports = {

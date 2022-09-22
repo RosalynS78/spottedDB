@@ -1,6 +1,3 @@
-
-
-
 const axios = require('axios')
 const mysql2 = require('mysql2')
 // const bcrypt = require('bcrypt')
@@ -13,11 +10,11 @@ const { handleSQLError } = require('../sql/error')
 const saltRounds = 10
 
 const signup = (req, res) => {
-  const { username, password } = req.body
-  let sql = "INSERT INTO usersCredentials (username, password) VALUES (?, ?)"
+  const { username, email, password } = req.body
+  let sql = "INSERT INTO usersCredentials (username, email, password) VALUES (?, ?, ?)"
 
   argon2.hash(password, saltRounds, function(err, hash) {
-    sql = mysql2.format(sql, [ username, hash ])
+    sql = mysql2.format(sql, [ username, email, hash ])
   
     pool.query(sql, (err, result) => {
       if (err) {
@@ -60,49 +57,29 @@ const login = (req, res) => {
   let sql = "SELECT * FROM usersCredentials WHERE username = ?"
   sql = mysql2.format(sql, [ username ])
 
-  try {
+  
   pool.query(sql, async (err, results) => {
     if (err) return handleSQLError(results, err)
 
     if (!results.length) return res.status(404).send('No matching users')
     
-//     const hash = results[0].password
-//     argon.compare(password, hash)
-//       .then(result => {
-//         if (!result) return res.status(400).send('Invalid password')
+    const hash = results[0].password
+    argon.compare(password, hash)
+      .then(result => {
+        if (!result) return res.status(400).send('Invalid password')
  
-//         const data = { ...results[0] }
-//         data.password = 'REDACTED'
+        const data = { ...results[0] }
+        data.password = 'REDACTED'
 
-//         const token = jwt.sign(data, 'secret')
-//         res.json({
-//           msg: 'Login successful',
-//           token
-//         })
-//       })
-//   })
-// }
-
-if (await argon2.verify(results[0].password, password, {type: argon2.argon2i})) {
-  const data = {...results[0]}
-  
-  const token = jwt.sign(data, process.env.JWT_SECRET, {expiresIn: "4h"})
-  res.json({
-      msg: "Logged in " + username,
-      token
+        const token = jwt.sign(data, 'secret')
+        res.json({
+          msg: 'Login successful',
+          token
+        })
+      })
   })
-} else {
-  res.send("Invalid Password Please Try Again")
-// passwords did not match
 }
-  
-})
-}
-catch(err) {
-  res.send(err)
-}
-// save user token
-}
+
 
 
 module.exports = {

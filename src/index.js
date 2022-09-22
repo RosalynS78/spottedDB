@@ -6,13 +6,13 @@ const app = express();
 app.use(express.static('public'))
 app.use(express.json());
 
-const cors = require("cors");
-app.use(cors(), express.json(), express.urlencoded({ extended: true }));
+// const cors = require("cors");
+// app.use(cors(), express.json(), express.urlencoded({ extended: true }));
 
 // app.use(cors({
 
 //     exposedHeaders: 'Authorization',
-//     origin: ["http://localhost:3000"],
+//     origin: ["http://localhost:"],
 
 //     credentials: true
     

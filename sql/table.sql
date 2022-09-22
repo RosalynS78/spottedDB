@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS users, found, lost, comments;
+DROP TABLE IF EXISTS users, usersCredentials, found, lost, comments;
 
 CREATE TABLE IF NOT EXISTS users (
   id INT NOT NULL AUTO_INCREMENT,
@@ -6,10 +6,18 @@ CREATE TABLE IF NOT EXISTS users (
   last_name VARCHAR(50),
   phone VARCHAR(50),
   email VARCHAR(50),
-  username VARCHAR(50),
-  password VARCHAR(50),
+  username VARCHAR(50) NOT NULL UNIQUE,
   PRIMARY KEY (id)
   );
+
+  CREATE TABLE usersCredentials (
+  id INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(50),
+  email VARCHAR(50),
+ 	password VARCHAR(50),
+  PRIMARY KEY (id),
+  UNIQUE KEY (username)
+);
 
 CREATE TABLE IF NOT EXISTS found (
   id INT NOT NULL AUTO_INCREMENT,
@@ -20,9 +28,8 @@ CREATE TABLE IF NOT EXISTS found (
   species VARCHAR(50),
   photo VARBINARY(20),
   date VARCHAR(50),
-  username VARCHAR(50),
+  username VARCHAR(50) NOT NULL UNIQUE,
   PRIMARY KEY (id),
-  UNIQUE KEY (username),
   FOREIGN KEY (user_id)
   REFERENCES users (id)
     ON DELETE CASCADE
@@ -37,9 +44,8 @@ CREATE TABLE IF NOT EXISTS lost (
   species VARCHAR(50),
   photo VARBINARY(20),
   date VARCHAR(50),
-  username VARCHAR(50),
   PRIMARY KEY (id),
-  UNIQUE KEY (username),
+  username VARCHAR(50) NOT NULL UNIQUE,
   FOREIGN KEY (user_id)
   REFERENCES users (id)
     ON DELETE CASCADE
@@ -50,9 +56,8 @@ CREATE TABLE IF NOT EXISTS comments (
   id INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
   posts VARCHAR(200),
-  username VARCHAR(50),
   PRIMARY KEY (id),
-   UNIQUE KEY (username),
+  username VARCHAR(50) NOT NULL UNIQUE,
   FOREIGN KEY (user_id)
   REFERENCES users (id)
     ON DELETE CASCADE
