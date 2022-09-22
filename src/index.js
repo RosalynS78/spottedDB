@@ -3,20 +3,21 @@ require("dotenv").config;
 const express = require("express");
 const app = express();
 
-app.use(express.static('public'))
+// app.use(express.static('public'))
 app.use(express.json());
+app.use(express.static("public"));
 
-// const cors = require("cors");
-// app.use(cors(), express.json(), express.urlencoded({ extended: true }));
-
-// app.use(cors({
-
-//     exposedHeaders: 'Authorization',
-//     origin: ["http://localhost:"],
-
-//     credentials: true
-    
-// }));
+app.use(function (req, res, next) {
+     res.header("Access-Control-Allow-Origin", "*");
+     res.header("Access-Control-Allow-Credentials", true);
+     res.header("Content-Type", "application/json");
+     res.header(
+       "Access-Control-Allow-Headers",
+       "Origin, X-Requested-With, Content-Type, Accept, authorization"
+     );
+     res.header("Access-Control-Allow-Methods", "*");
+     next();
+   });
 
 
 const { logger } = require('../middleware/index');
@@ -38,7 +39,6 @@ app.get("/", (req, res) => {
 })
 
 let port = process.env.PORT || 4000;
-
-app.listen(port, function() {
-     console.log ("Web server is listening on port", port)
-    });
+app.listen(port, () => {
+     console.log(`Web server is listening on port ${port}!`);
+   });

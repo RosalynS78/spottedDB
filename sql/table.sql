@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS found (
   species VARCHAR(50),
   photo VARBINARY(20),
   date VARCHAR(50),
-  username VARCHAR(50) NOT NULL UNIQUE,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id)
   REFERENCES users (id)
@@ -45,7 +44,6 @@ CREATE TABLE IF NOT EXISTS lost (
   photo VARBINARY(20),
   date VARCHAR(50),
   PRIMARY KEY (id),
-  username VARCHAR(50) NOT NULL UNIQUE,
   FOREIGN KEY (user_id)
   REFERENCES users (id)
     ON DELETE CASCADE
@@ -57,7 +55,6 @@ CREATE TABLE IF NOT EXISTS comments (
   user_id INT NOT NULL,
   posts VARCHAR(200),
   PRIMARY KEY (id),
-  username VARCHAR(50) NOT NULL UNIQUE,
   FOREIGN KEY (user_id)
   REFERENCES users (id)
     ON DELETE CASCADE

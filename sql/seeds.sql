@@ -1,4 +1,4 @@
-INSERT IGNORE INTO users
+INSERT INTO users
 	(first_name, last_name, phone, email, username)
 VALUES 
     ("James", "Butt", "626-696-2777", "cory.gibes@gmail.com", "jamesB"),
@@ -13,34 +13,34 @@ VALUES
     ("Kris", "Marrier", "812-442-8544", "kristofer.bennick@yahoo.com", "marry");
   
 
-INSERT IGNORE INTO found
-    (user_id, name, gender, age, species, photo, date, username)
+INSERT INTO found
+    (user_id, name, gender, age, species, photo, date)
 VALUES
-    (1, "Fluffy", "Female", "6", "Cat", "mediumblob", "06.12.22", "jamesB"),
-    (2, "Fido", "Male", "5", "Dog", "mediumblob", "01.05.22", "jd"),
-	(3, "Tiger", "Female", "12", "Cat", "mediumblob", "03.16.22", "arty"),
-    (4, "Jack", "Male", "3", "Rabbit", "mediumblob", "08.19.22", "pappy"),
-	(5, "Hiro", "Female", "4", "Turtle", "mediumblob", "08.19.22", "foller");
+    (1, "Fluffy", "Female", "6", "Cat", "mediumblob", "06.12.22"),
+    (2, "Fido", "Male", "5", "Dog", "mediumblob", "01.05.22"),
+	(3, "Tiger", "Female", "12", "Cat", "mediumblob", "03.16.22"),
+    (4, "Jack", "Male", "3", "Rabbit", "mediumblob", "08.19.22"),
+	(5, "Hiro", "Female", "4", "Turtle", "mediumblob", "08.19.22");
 
-INSERT IGNORE INTO lost
-    (user_id, name, gender, age, species, photo, date, username)
+INSERT INTO lost
+    (user_id, name, gender, age, species, photo, date)
 VALUES
-    (6, "Spot", "Male", "1", "Dog", "mediumblob", "06.19.22", "simm"),
-    (7, "Jinkies", "Male", "6", "Cat", "mediumblob", "06.12.22", "mt"),
-    (8, "Sparkles", "Female", "9", "Iguana", "mediumblob", "01.05.22", "dill"),
-	(9, "Polly", "Female", "11", "Bird", "mediumblob", "03.16.22", "sage"),
-    (10, "Buddy", "Male", "3", "Dog", "mediumblob", "08.19.22", "marry");
+    (6, "Spot", "Male", "1", "Dog", "mediumblob", "06.19.22"),
+    (7, "Jinkies", "Male", "6", "Cat", "mediumblob", "06.12.22"),
+    (8, "Sparkles", "Female", "9", "Iguana", "mediumblob", "01.05.22"),
+	(9, "Polly", "Female", "11", "Bird", "mediumblob", "03.16.22"),
+    (10, "Buddy", "Male", "3", "Dog", "mediumblob", "08.19.22");
 
-INSERT IGNORE INTO comments
-	(user_id, posts, username)
+INSERT INTO comments
+	(user_id, posts)
 VALUES 
-    (2, "Fluffy cat seen around the neighborhood", "jd"),
-    (1, "Found Dog named Fido", "jamesB"),
-    (3, "Sweet bird  found", "arty"),
-    (4, "Found Rabbit in backyard", "pappy"),
-    (5, "Anyone missing a turtle by chance", "foller"),
-    (9, "Spot is missing", "sage"),
-    (6, "Help me find Jinkies", "simm"),
-    (10, "Missing Sparkles the Iguana", "marry"),
-    (7, "Polly flew out", "mt"),
-    (8, "Help me findy Buddy", "dill");
+    (2, "Fluffy cat seen around the neighborhood"),
+    (1, "Found Dog named Fido"),
+    (3, "Sweet bird  found"),
+    (4, "Found Rabbit in backyard"),
+    (5, "Anyone missing a turtle by chance"),
+    (9, "Spot is missing"),
+    (6, "Help me find Jinkies"),
+    (10, "Missing Sparkles the Iguana"),
+    (7, "Polly flew out"),
+    (8, "Help me findy Buddy");

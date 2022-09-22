@@ -6,17 +6,14 @@ class Connection {
   constructor() {
     if (!this.pool) {
       console.log('creating mysql connection...')
-
-      const config = {
+      this.pool = mysql.createPool({
         connectionLimit: 100,
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
         // port: process.env.DB_PORT
-      }
-
-      this.pool = mysql.createPool(config)
+      })
 
       return this.pool
     }
