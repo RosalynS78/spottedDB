@@ -1,11 +1,21 @@
 require("dotenv").config;
+// let bodyParser = require("body-parser")
 
 const express = require("express");
 const app = express();
 
-// app.use(express.static('public'))
+
 app.use(express.json());
+// app.use(express.static("build"));
 app.use(express.static("public"));
+// app.use(bodyParser.json());
+
+
+// const cors = require('cors');
+// app.use(cors({
+//     origin: ['http://localhost:3000'],
+//     exposedHeaders: 'Authorization'
+// }));
 
 app.use(function (req, res, next) {
      res.header("Access-Control-Allow-Origin", "*");
@@ -13,14 +23,24 @@ app.use(function (req, res, next) {
      res.header("Content-Type", "application/json");
      res.header(
        "Access-Control-Allow-Headers",
-       "Origin, X-Requested-With, Content-Type, Accept, authorization"
+       "Origin, X-Requested-With, Content-Type, Accept, Authorization"
      );
      res.header("Access-Control-Allow-Methods", "*");
      next();
    });
 
 
-const { logger } = require('../middleware/index');
+
+// app.use(
+//   cors({
+//     origin: ["http://localhost:3000"],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
+
+
+const { logger } = require('../middleware/index.js');
 const authRouter = require('../routes/auth');
 const usersRouter = require('../routes/users');
 const lostRouter = require('../routes/lost');

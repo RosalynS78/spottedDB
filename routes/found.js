@@ -1,20 +1,19 @@
-const express = require('express')
-const usersController = require('../controllers/found')
-// const { checkJwt } = require('../middleware/index')
+const express = require('express');
+const foundController = require('../controllers/found');
+
+const { checkJwt } = require('../middleware/index.js');
+
 const router = express.Router()
 
-router.get('/', usersController.getAllFound)
+router.get('/', foundController.getAllFound)
 
-// router.post('/', checkJwt, usersController.createFound)
+router.get('/:id', foundController.getFoundById)
 
-// router.put('/:id', checkJwt, usersController.updateFound)
+router.post('/', checkJwt, foundController.createFound)
 
-// router.delete('/:id', checkJwt, usersController.deleteFound)
+router.put('/:id', checkJwt, foundController.updateFound)
 
-router.post('/', usersController.createFound)
+router.delete('/:id', checkJwt, foundController.deleteFound)
 
-router.put('/:id', usersController.updateFound)
-
-router.delete('/:id', usersController.deleteFound)
 
 module.exports = router

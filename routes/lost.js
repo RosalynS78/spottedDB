@@ -1,20 +1,18 @@
-const express = require('express')
-const usersController = require('../controllers/lost')
-// const { checkJwt } = require('../middleware/index')
+const express = require('express');
+const lostController = require('../controllers/lost');
+
+const { checkJwt } = require('../middleware/index.js');
+
 const router = express.Router()
 
-router.get('/', usersController.getAllLost)
+router.get('/', lostController.getAllLost)
 
-// router.post('/', checkJwt, usersController.createLost)
+router.get('/:id', lostController.getLostById)
 
-// router.put('/:id', checkJwt, usersController.updateLost)
+router.post('/', checkJwt, lostController.createLost)
 
-// router.delete('/:id', checkJwt, usersController.deleteLost)
+router.put('/:id', checkJwt, lostController.updateLost)
 
-router.post('/', usersController.createLost)
-
-router.put('/:id', usersController.updateLost)
-
-router.delete('/:id', usersController.deleteLost)
+router.delete('/:id',checkJwt, lostController.deleteLost)
 
 module.exports = router
