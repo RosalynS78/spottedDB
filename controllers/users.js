@@ -2,23 +2,22 @@ const mysql = require('mysql2')
 const pool = require('../sql/connections')
 const { handleSQLError } = require('../sql/error')
 
-// for testing and admin
-// const getAllUsers = (req, res) => {
-//   pool.query("SELECT * FROM users", (err, results) => {
-//     if (err) return handleSQLError(res, err)
-//     return res.json(results);
-//   })
-// }
+const getAllUsers = (req, res) => {
+  pool.query("SELECT * FROM users", (err, results) => {
+    if (err) return handleSQLError(res, err)
+    return res.json(results);
+  })
+}
 
-// const getUserById = (req, res) => {
-//   let sql = "SELECT * FROM users WHERE id= ?"
-//   sql = mysql.format(sql, [ req.params.id ])
+const getUserById = (req, res) => {
+  let sql = "SELECT * FROM users WHERE id= ?"
+  sql = mysql.format(sql, [ req.params.id ])
 
-//   pool.query(sql, (err, results) => {
-//     if (err) return handleSQLError(res, err)
-//     return res.json(results);
-//   })
-// }
+  pool.query(sql, (err, results) => {
+    if (err) return handleSQLError(res, err)
+    return res.json(results);
+  })
+}
 
 const updateUserById = (req, res) => {
   const { password } = req.body;
@@ -53,8 +52,8 @@ const createUser = (req, res) => {
 };
 
 module.exports = {
-  // getAllUsers,
-  // getUserById,
+  getAllUsers,
+  getUserById,
   createUser,
   updateUserById,
   deleteUser,

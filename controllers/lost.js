@@ -54,8 +54,6 @@ const updateLost = (req, res) => {
   }
 
 
-  
-  
   module.exports = {
     getAllLost,
     getLostById,
