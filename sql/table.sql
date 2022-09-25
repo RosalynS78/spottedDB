@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(50),
   password VARCHAR(500),
   contact VARCHAR(100),
+  profilepic VARBINARY(500),
   PRIMARY KEY (id)
   );
 
@@ -14,8 +15,10 @@ CREATE TABLE IF NOT EXISTS found (
   userId INT NULL,
   gender VARCHAR(50),
   species VARCHAR(50),
-  photo VARBINARY(20),
+  photo VARBINARY(500),
   date VARCHAR(50),
+  comments VARCHAR(100),
+  profilepic VARBINARY(500),
   foundId INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (foundId),
   FOREIGN KEY (userId)
@@ -27,8 +30,10 @@ CREATE TABLE IF NOT EXISTS lost (
   userId INT NULL,
   gender VARCHAR(50),
   species VARCHAR(50),
-  photo VARBINARY(20),
+  photo VARBINARY(500),
   date VARCHAR(50),
+  comments VARCHAR(100),
+  profilepic VARBINARY(500),
   lostId INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (lostId),
   FOREIGN KEY (userId)
