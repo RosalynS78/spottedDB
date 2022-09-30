@@ -20,9 +20,9 @@ const getFoundById = (req, res) => {
 }
 
 const updateFound = (req, res) => {
-    const {gender, species, photo, date} = req.body
-    let sql = "UPDATE found SET gender = '?', species = '?', photo = '?', date = '?' WHERE foundId = ?"
-    sql = mysql.format(sql, [ gender, species, photo, date, req.params.id ])
+    const {gender, name, species, date, email, phone, comments} = req.body
+    let sql = "UPDATE found SET gender = '?', name = '?', species = '?', date = '?', email = '?',  phone = '?', comments = '?' WHERE foundId = ?"
+    sql = mysql.format(sql, [ gender, name, species, date, email, phone, comments, req.params.id ])
   
     pool.query(sql, (err, results) => {
       if (err) return handleSQLError(res, err)
@@ -41,9 +41,9 @@ const updateFound = (req, res) => {
   }
   
   const createFound = (req, res) => {
-    const {userId, gender, species, photo, date} = req.body
-    let sql = "INSERT INTO found (userId, gender, species, photo, date) VALUES (?, ?, ?, ?, ?)";
-    sql = mysql.format(sql, [ userId, gender, species, photo, date, req.params.id ])
+    const {gender, name, species, date, email, phone, comments} = req.body
+    let sql = "INSERT INTO found (gender, name, species, date, email, phone, comments) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    sql = mysql.format(sql, [gender, name, species, date, email, phone, comments, req.params.id ])
   
     pool.query(sql, (err, results) => {
       if (err) return handleSQLError(res, err)
