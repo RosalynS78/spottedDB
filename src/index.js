@@ -17,6 +17,8 @@ app.use(express.static("public"));
 //     exposedHeaders: 'Authorization'
 // }));
 
+
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
      res.header("Access-Control-Allow-Origin", "*");
