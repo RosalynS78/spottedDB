@@ -41,9 +41,9 @@ const deleteUser= (req, res) => {
 }
 
 const createUser = (req, res) => {
-  const { username, email, password, contact } = req.body;
-  let sql = "INSERT INTO users (username, email, password, contact) VALUES (?, ?, ?, ?)";
-  sql = mysql.format(sql, [username, email, password, contact]);
+  const { username, email, password } = req.body;
+  let sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+  sql = mysql.format(sql, [username, email, password]);
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err);
