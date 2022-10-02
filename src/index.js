@@ -11,7 +11,7 @@ app.use(express.static("public"));
 // app.use(bodyParser.json());
 
 
-// const cors = require('cors');
+const cors = require('cors');
 // app.use(cors({
 //     origin: ['http://localhost:3000'],
 //     exposedHeaders: 'Authorization'
@@ -37,6 +37,7 @@ app.use(function (req, res, next) {
 // app.use(
 //   cors({
 //     origin: ["http://localhost:3000"],
+//     exposedHeaders: 'Authorization',
 //     methods: ["GET", "POST", "PUT", "DELETE"],
 //     credentials: true,
 //   })

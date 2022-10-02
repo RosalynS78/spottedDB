@@ -9,10 +9,11 @@ router.get('/', lostController.getAllLost)
 
 router.get('/:id', lostController.getLostById)
 
-router.post('/', checkJwt, lostController.createLost)
+// router.post('/', checkJwt, lostController.createLost)
+router.post('/', lostController.createLost)
 
-router.put('/:id', checkJwt, lostController.updateLost)
+router.put('/:id', lostController.updateLost)
 
-router.delete('/:id',checkJwt, lostController.deleteLost)
+router.delete('/:id', lostController.deleteLost)
 
 module.exports = router

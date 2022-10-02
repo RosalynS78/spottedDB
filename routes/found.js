@@ -9,11 +9,11 @@ router.get('/', foundController.getAllFound)
 
 router.get('/:id', foundController.getFoundById)
 
-router.post('/', checkJwt, foundController.createFound)
+router.post('/', foundController.createFound)
 
-router.put('/:id', checkJwt, foundController.updateFound)
+router.put('/:id', foundController.updateFound)
 
-router.delete('/:id', checkJwt, foundController.deleteFound)
+router.delete('/:id', foundController.deleteFound)
 
 
 module.exports = router

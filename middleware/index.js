@@ -15,6 +15,7 @@ const checkJwt = (req, res, next) => {
     signedToken = parts[1];
   };
 
+
   if(signedToken){
     jwt.verify(signedToken, process.env.JWT_SECRET, (err, decoded)=>{
       if(err){
@@ -31,6 +32,8 @@ const checkJwt = (req, res, next) => {
   
     res.sendStatus(400);
   }
+
+
 };
 
 module.exports = {
