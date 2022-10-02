@@ -1,6 +1,8 @@
 const express = require('express');
 const lostController = require('../controllers/lost');
 
+
+// figure out why unable to post with jwt 
 const { checkJwt } = require('../middleware/index.js');
 
 const router = express.Router()

@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS users (
 
 
 CREATE TABLE IF NOT EXISTS found (
-  userId INT NULL,
+  userId INT,
   gender VARCHAR(50),
-  name VARCHAR(50) NULL,
+  name VARCHAR(50),
   species VARCHAR(50),
   date VARCHAR(50),
   email VARCHAR(50),
@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS found (
 );
 
 CREATE TABLE IF NOT EXISTS lost (
-  userId INT NULL,
+  userId INT,
   gender VARCHAR(50),
-  name VARCHAR(50) NULL,
+  name VARCHAR(50),
   species VARCHAR(50),
   date VARCHAR(50),
   email VARCHAR(50),

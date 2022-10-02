@@ -20,9 +20,9 @@ const getFoundById = (req, res) => {
 }
 
 const updateFound = (req, res) => {
-    const {gender, name, species, date, email, phone, comments} = req.body
-    let sql = "UPDATE found SET gender = '?', name = '?', species = '?', date = '?', email = '?',  phone = '?', comments = '?' WHERE foundId = ?"
-    sql = mysql.format(sql, [ gender, name, species, date, email, phone, comments, req.params.id ])
+    const {gender, name, species, date, email, phone, comments, userId} = req.body
+    let sql = "UPDATE found SET gender = ?, name = ?, species = ?, date = ?, email = ?,  phone = ?, comments = ?, userId = ? WHERE foundId = ?"
+    sql = mysql.format(sql, [ gender, name, species, date, email, phone, comments, userId, req.params.id ])
   
     pool.query(sql, (err, results) => {
       if (err) return handleSQLError(res, err)
@@ -41,15 +41,48 @@ const updateFound = (req, res) => {
   }
   
   const createFound = (req, res) => {
-    const {gender, name, species, date, email, phone, comments} = req.body
-    let sql = "INSERT INTO found (gender, name, species, date, email, phone, comments) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    sql = mysql.format(sql, [gender, name, species, date, email, phone, comments, req.params.id ])
+    const {gender, name, species, date, email, phone, comments, userId} = req.body
+    let sql = "INSERT INTO found (gender, name, species, date, email, phone, comments, userId) VALUES (?, ?, ?, ?, ?, ?, ?, userId)";
+    sql = mysql.format(sql, [gender, name, species, date, email, phone, comments, userId, req.params.id ])
   
     pool.query(sql, (err, results) => {
       if (err) return handleSQLError(res, err)
       return res.json({ newId: results.insertId });
     })
   }
+
+  // figure out how to tie user and found id and how to increment userId
+  const getFoundByUserId= function(req, res){
+    let userId = req.params.id;
+  
+    let sql = "select * from found where userId= ?";
+    
+    let params = []; 
+    params.push(userId); 
+    
+    db.query(sql, params, function(err, results){
+        if(err) {
+            console.log("failed to execute query:", err);
+            res.sendStatus(500); 
+       
+        } else {
+            if(results.length >= 1){
+                res.json(results)
+                console.log("this is it")
+            } else if (results.length == 0) {
+              
+                res.sendStatus(404);
+                console.log("no results")
+                
+            }
+        }
+    })
+    
+};
+
+
+
+
   
   
   module.exports = {
@@ -58,4 +91,5 @@ const updateFound = (req, res) => {
     createFound,
     updateFound,
     deleteFound,
+    getFoundByUserId
   }

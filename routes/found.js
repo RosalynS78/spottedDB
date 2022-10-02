@@ -15,5 +15,8 @@ router.put('/:id', foundController.updateFound)
 
 router.delete('/:id', foundController.deleteFound)
 
+// testing
+
+router.get('/userslost/:id', foundController.getFoundById)
 
 module.exports = router

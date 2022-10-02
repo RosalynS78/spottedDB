@@ -55,6 +55,7 @@ app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/lost', lostRouter);
 app.use('/found',foundRouter);
+app.use('/userslost',foundRouter);
 
 
 app.get("/", (req, res) => {

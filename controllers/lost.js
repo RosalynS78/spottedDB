@@ -20,9 +20,9 @@ const getLostById = (req, res) => {
 }
 
 const updateLost = (req, res) => {
-    const { gender, name, species, date, email, phone, comments } = req.body
-    let sql = "UPDATE lost SET gender = '?', name = '?', species = '?', date = '?', email = '?', phone = '?', comments = '?' WHERE lostId = ?"
-    sql = mysql.format(sql, [ gender, name, species, date, email, phone, comments, req.params.id ])
+    const { gender, name, species, date, email, phone, comments, userId } = req.body
+    let sql = "UPDATE lost SET gender = ?, name = ?, species = ?, date = ?, email = ?, phone = ?, comments = ?, userId = ?, WHERE lostId = ?"
+    sql = mysql.format(sql, [ gender, name, species, date, email, phone, comments, userId, req.params.id ])
   
     pool.query(sql, (err, results) => {
       if (err) return handleSQLError(res, err)
@@ -41,9 +41,9 @@ const updateLost = (req, res) => {
   }
   
   const createLost = (req, res) => {
-    const { gender, name, species, date, email, phone, comments} = req.body
-    let sql = "INSERT INTO lost (gender, name, species, date, email, phone, comments) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    sql = mysql.format(sql, [gender, name, species, date, email, phone, comments])
+    const { gender, name, species, date, email, phone, comments, userId} = req.body
+    let sql = "INSERT INTO lost (gender, name, species, date, email, phone, comments, userId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    sql = mysql.format(sql, [gender, name, species, date, email, phone, comments, userId])
   
     pool.query(sql, (err, results) => {
       if (err) return handleSQLError(res, err);
